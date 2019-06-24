@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1056691018069",
+    "firebase_url": "https://loadcell-7b8be.firebaseio.com",
+    "project_id": "loadcell-7b8be",
+    "storage_bucket": "loadcell-7b8be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056691018069:android:3a6236b3dd443ff9",
+        "android_client_info": {
+          "package_name": "com.example.android.smartrefrigerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056691018069-oo3ckhj31ibtcvrn789cr3uvu6sfmf07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.smartrefrigerator",
+            "certificate_hash": "70d29eb5e2465735adc00c0a765964e1eeafccb0"
+          }
+        },
+        {
+          "client_id": "1056691018069-ajpbjti6uitu91j7iu0qjm064tot42m2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuAearCGZj9hyu3dLrWzQ_HvhnKTcdDBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056691018069-ajpbjti6uitu91j7iu0qjm064tot42m2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

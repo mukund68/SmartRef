@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ScanInvoice">
+
+    <!--At start-->
+    <Button
+        android:id="@+id/buttonToChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Choose Image" />
+
+    <!--At successful choose operation-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/upload_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgViewForInvoice"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="40dp"/>
+
+        <Button
+            android:id="@+id/buttonForUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:layout_below="@+id/imgViewForInvoice"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

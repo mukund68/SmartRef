@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SmartRefrigerator</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_alerts">Alerts</string>
+
+    <string name="menu_scanOCR">Scan Invoice</string>
+    <string name="menu_setExpiry">Set Expiry</string>
+    <string name="menu_compartmentalization">View Compartments</string>
+    <string name="menu_suggestion">Suggest Recipes</string>
+    <string name="menu_consumption">Low Running Items</string>
+    <string name="menu_comparison">Compare Prices</string>
+    <string name="menu_user">Manage User</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

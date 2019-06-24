@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_scanInvoice"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_scanOCR"
+            android:orderInCategory="1"/>
+        <item
+            android:id="@+id/nav_setExpiry"
+            android:icon="@drawable/icon_barcode"
+            android:title="@string/menu_setExpiry"
+            android:orderInCategory="2"/>
+        <item
+            android:id="@+id/nav_compartmentalization"
+            android:icon="@drawable/icon_compartment"
+            android:title="@string/menu_compartmentalization"
+            android:orderInCategory="3"/>
+        <item
+            android:id="@+id/nav_recipeSuggestion"
+            android:icon="@drawable/icon_suggest_recipes"
+            android:title="@string/menu_suggestion"
+            android:orderInCategory="4"/>
+        <item
+            android:id="@+id/nav_lowRunningItems"
+            android:icon="@drawable/icon_low_running_items"
+            android:title="@string/menu_consumption"
+            android:orderInCategory="5" />
+        <item
+            android:id="@+id/nav_comparePrices"
+            android:icon="@drawable/icon_compare_prices"
+            android:title="@string/menu_comparison"
+            android:orderInCategory="6" />
+        <item
+            android:id="@+id/nav_manageUser"
+            android:icon="@drawable/icon_manage_user"
+            android:title="@string/menu_user"
+            android:orderInCategory="7" />
+    </group>
+
+</menu>
