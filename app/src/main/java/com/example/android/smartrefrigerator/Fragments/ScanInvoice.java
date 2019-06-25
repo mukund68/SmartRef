@@ -1,6 +1,7 @@
 package com.example.android.smartrefrigerator.Fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,9 +36,6 @@ import static android.app.Activity.RESULT_OK;
 public class ScanInvoice extends Fragment {
 
     private static ScanInvoice scanInvoiceFragment;
-
-    private static final int PICK_IMAGE_CHOOSER_REQUEST_CODE = 200;
-    private static final int CROP_IMAGE_ACTIVITY_REQUEST_CODE = 203;
 
     private Button buttonToChoose, buttonForUpload;
     private ImageView imageView;
@@ -75,7 +73,7 @@ public class ScanInvoice extends Fragment {
         buttonToChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSelectImageClick();
+                onSelectImageClick(v);
             }
         });
 
@@ -88,29 +86,29 @@ public class ScanInvoice extends Fragment {
 
     }
 
-    public void onSelectImageClick() {
+    public void onSelectImageClick(View v) {
+        //CropImage.startPickImageActivity(this);
         scanInvoiceFragment.startActivityForResult(CropImage.getPickImageChooserIntent(getActivity()), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("Inside onActivity","Inside onActivity");
+        Log.e("Inside onActivity","Inside onActivity");
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK)
-        //if (requestCode == GALLERY_PICK && resultCode == RESULT_OK)
         {
+            Log.e("Inside onActivitycamera","Inside onActivitycamera");
             Uri imageUri = CropImage.getPickImageResultUri(getContext(), data);
-            Log.d("Inside onActivitycamera","Inside onActivitycamera");
 
             // For API >= 23 we need to check specifically that we have permissions to read external storage.
             if (CropImage.isReadExternalStoragePermissionsRequired(getContext(), imageUri)) {
                 // request permissions and handle the result in onRequestPermissionsResult()
                 mCropImageUri = imageUri;
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-                Log.d("Inside External","Inside External");
+                Log.e("Inside External","Inside External");
             } else {
                 // no permissions required or already grunted, can start crop image activity
-                Log.d("startCropImageActivity","startCropImageActivity");
+                Log.e("startCropImageActivity","startCropImageActivity");
                 startCropImageActivity(imageUri);
             }
         }

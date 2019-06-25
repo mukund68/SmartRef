@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_alerts">Alerts</string>
 
+    <string name="menu_scanCompartments">Scan Compartments</string>
     <string name="menu_scanOCR">Scan Invoice</string>
     <string name="menu_setExpiry">Set Expiry</string>
     <string name="menu_compartmentalization">View Compartments</string>
