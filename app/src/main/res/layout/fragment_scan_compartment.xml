@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ScanCompartment">
+
+
+    <!--At start-->
+    <Button
+        android:id="@+id/buttonToChooseRack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Select Rack View" />
+
+    <!--At successful choose operation-->
+    <RelativeLayout
+        android:id="@+id/upload_comp_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgViewForRack"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="30dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/imgViewForRack">
+
+            <RadioButton
+                android:id="@+id/radio_r1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Rack 1" />
+
+            <RadioButton
+                android:id="@+id/radio_r2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Rack 2" />
+
+            <RadioButton
+                android:id="@+id/radio_r3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Rack 3" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonForUploadComp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

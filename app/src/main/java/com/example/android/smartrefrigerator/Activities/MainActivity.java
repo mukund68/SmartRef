@@ -17,9 +17,11 @@ import android.view.Menu;
 
 import com.example.android.smartrefrigerator.Fragments.CompareOnlinePrices;
 import com.example.android.smartrefrigerator.Fragments.Compartmentalization;
+import com.example.android.smartrefrigerator.Fragments.FridgeContent;
 import com.example.android.smartrefrigerator.Fragments.LowRunningProducts;
 import com.example.android.smartrefrigerator.Fragments.ManageUser;
 import com.example.android.smartrefrigerator.Fragments.RecipeSuggestion;
+import com.example.android.smartrefrigerator.Fragments.ScanCompartment;
 import com.example.android.smartrefrigerator.Fragments.ScanInvoice;
 import com.example.android.smartrefrigerator.Fragments.SetExpiry;
 import com.example.android.smartrefrigerator.R;
@@ -32,9 +34,11 @@ public class MainActivity extends AppCompatActivity
 
     private final CompareOnlinePrices compareOnlinePricesFragment = CompareOnlinePrices.getCompareOnlinePricesFragment();
     private final Compartmentalization compartmentalizationFragment = Compartmentalization.getCompartmentalizationFragment();
+    private final FridgeContent fridgeContentFragment = FridgeContent.getFridgeContentFragment();
     private final LowRunningProducts lowRunningProductsFragment = LowRunningProducts.getLowRunningProductsFragment();
     private final ManageUser manageUserFragment = ManageUser.getManageUserFragment();
     private final RecipeSuggestion recipeSuggestionFragment = RecipeSuggestion.getRecipeSuggestionFragment();
+    private final ScanCompartment scanCompartmentFragment = ScanCompartment.getScanCompartmentFragment();
     private final ScanInvoice scanInvoiceFragment = ScanInvoice.getScanInvoiceFragment();
     private final SetExpiry setExpiryFragment = SetExpiry.getSetExpiryFragment();
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         fragmentManager = getSupportFragmentManager();
-        fragment = scanInvoiceFragment;
+        fragment = scanCompartmentFragment;
         replaceFragment(fragment);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -100,17 +104,25 @@ public class MainActivity extends AppCompatActivity
 
         switch (id)
         {
+            case R.id.nav_scanCompartments:
+                if (fragment != scanCompartmentFragment)
+                    replaceFragment(scanCompartmentFragment);
+                break;
             case R.id.nav_scanInvoice:
                 if (fragment != scanInvoiceFragment)
                     replaceFragment(scanInvoiceFragment);
+                break;
+            case R.id.nav_compartmentalization:
+                if (fragment != compartmentalizationFragment)
+                    replaceFragment(compartmentalizationFragment);
                 break;
             case R.id.nav_setExpiry:
                 if (fragment != setExpiryFragment)
                     replaceFragment(setExpiryFragment);
                 break;
-            case R.id.nav_compartmentalization:
-                if (fragment != compartmentalizationFragment)
-                    replaceFragment(compartmentalizationFragment);
+            case R.id.nav_fridgeContents:
+                if (fragment != fridgeContentFragment)
+                    replaceFragment(fridgeContentFragment);
                 break;
             case R.id.nav_recipeSuggestion:
                 if (fragment != recipeSuggestionFragment)

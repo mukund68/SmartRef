@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.android.smartrefrigerator.R;
@@ -32,23 +34,25 @@ import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ScanInvoice extends Fragment {
+public class ScanCompartment extends Fragment {
 
-    private static ScanInvoice scanInvoiceFragment;
+    private static ScanCompartment scanCompartmentFragment;
 
+    public String resultOfRadio = "";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 123;
-    private Button buttonToChoose, buttonForUpload;
+    private Button buttonToChooseRack, buttonForUploadComp;
     private ImageView imageView;
     private Uri mCropImageUri;
     private Uri imageUri;
     private Uri filePath;
     private View relativeView;
+    private RadioGroup radioGroup;
 
     //Firebase
     FirebaseStorage storage;
     StorageReference storageReference;
 
-    public ScanInvoice() {
+    public ScanCompartment() {
         // Required empty public constructor
     }
 
@@ -56,45 +60,63 @@ public class ScanInvoice extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scan_invoice, container, false);
+        return inflater.inflate(R.layout.fragment_scan_compartment, container, false);
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         //Initialize Views
-        buttonToChoose = view.findViewById(R.id.buttonToChoose);
-        buttonForUpload = view.findViewById(R.id.buttonForUpload);
-        imageView = view.findViewById(R.id.imgViewForInvoice);
-        relativeView = view.findViewById(R.id.upload_layout);
+        buttonToChooseRack = view.findViewById(R.id.buttonToChooseRack);
+        buttonForUploadComp = view.findViewById(R.id.buttonForUploadComp);
+        imageView = view.findViewById(R.id.imgViewForRack);
+        relativeView = view.findViewById(R.id.upload_comp_layout);
+        radioGroup = view.findViewById(R.id.radioGroup);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        buttonToChoose.setOnClickListener(new View.OnClickListener() {
+        buttonToChooseRack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onSelectImageClick();
             }
         });
 
-        buttonForUpload.setOnClickListener(new View.OnClickListener() {
+        buttonForUploadComp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uploadImage();
             }
         });
 
+        radioGroup.clearCheck();
+
+        radioGroup.setOnCheckedChangeListener(
+            new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    // Get the selected Radio Button
+                    RadioButton radioButton = (RadioButton)group.findViewById(checkedId);
+                    Log.e("Radio1",radioButton.toString());
+                    Log.e("Radio2",radioButton.getText().toString());
+                    resultOfRadio = radioButton.getText().toString().replace("Rack ","r");
+                    if (!resultOfRadio.equals("")){
+                        buttonForUploadComp.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+
     }
 
     public void onSelectImageClick() {
         requestPermissions(new String[]{Manifest.permission.CAMERA}, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-        scanInvoiceFragment.startActivityForResult(CropImage.getPickImageChooserIntent(getActivity()), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
+        scanCompartmentFragment.startActivityForResult(CropImage.getPickImageChooserIntent(getActivity()), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("Inside onActivity","Inside onActivity");
         // handle result of pick image chooser
         if ((requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE || requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) && resultCode == RESULT_OK)
         {
@@ -125,13 +147,13 @@ public class ScanInvoice extends Fragment {
                 imageView.setImageURI(filePath);
                 Toast.makeText(getContext(), "Cropping successful", Toast.LENGTH_SHORT).show();
                 Log.e("Before Visibility","Before Visibility");
-                buttonToChoose.setVisibility(View.GONE);
+                buttonToChooseRack.setVisibility(View.GONE);
                 relativeView.setVisibility(View.VISIBLE);
-                Log.e("After Visibility","After Visibility");
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(getContext(), "Cropping failed: " + result.getError(), Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     @Override
@@ -164,11 +186,7 @@ public class ScanInvoice extends Fragment {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-            currentDateTimeString = currentDateTimeString.replace(" ", "-");
-            Log.e("Time", currentDateTimeString);
-
-            StorageReference ref = storageReference.child("scannedInvoice/"+ currentDateTimeString + ".jpg");
+            StorageReference ref = storageReference.child("rackImage/"+ resultOfRadio + ".jpg");
 
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -196,10 +214,10 @@ public class ScanInvoice extends Fragment {
         }
     }
 
-    public static ScanInvoice getScanInvoiceFragment() {
-        if (scanInvoiceFragment == null)
-            scanInvoiceFragment = new ScanInvoice();
-        return scanInvoiceFragment;
+    public static ScanCompartment getScanCompartmentFragment() {
+        if (scanCompartmentFragment == null)
+            scanCompartmentFragment = new ScanCompartment();
+        return scanCompartmentFragment;
     }
 
 }

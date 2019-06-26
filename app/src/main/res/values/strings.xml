@@ -11,6 +11,7 @@
     <string name="menu_scanOCR">Scan Invoice</string>
     <string name="menu_setExpiry">Set Expiry</string>
     <string name="menu_compartmentalization">View Compartments</string>
+    <string name="menu_fridgeContents">View Fridge Contents</string>
     <string name="menu_suggestion">Suggest Recipes</string>
     <string name="menu_consumption">Low Running Items</string>
     <string name="menu_comparison">Compare Prices</string>
