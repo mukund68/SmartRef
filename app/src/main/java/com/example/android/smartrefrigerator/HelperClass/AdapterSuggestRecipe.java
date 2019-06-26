@@ -20,7 +20,6 @@ public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRec
 
     private ArrayList<SuggestRecipe> suggestRecipes;
     private Context context;
-    private FoldingCell fc;
 
     public AdapterSuggestRecipe(ArrayList<SuggestRecipe> suggestRecipes, Context context) {
         this.suggestRecipes = suggestRecipes;
@@ -61,17 +60,6 @@ public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRec
             apiPresentIngredients += presentIngredient + "\n";
         }
         viewHolder.presentIngredients.setText(apiPresentIngredients);
-
-        /*fc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    fc.toggle(false);
-                }catch (Exception e){
-                    fc.toggle(true);
-                }
-            }
-        });*/
 
     }
 

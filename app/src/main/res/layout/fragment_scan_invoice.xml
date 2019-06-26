@@ -6,16 +6,16 @@
     tools:context=".Fragments.ScanInvoice">
 
     <!--At start-->
-    <Button
-        android:id="@+id/buttonToChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Choose Image" />
+
+        <Button
+            android:id="@+id/buttonToChoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Choose Image" />
 
     <!--At successful choose operation-->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:id="@+id/upload_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

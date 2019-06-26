@@ -11,8 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
+
     <include
-        layout="@layout/recycler_view"
-        android:id="@+id/low_running_products_recycler_view"/>
+        android:id="@+id/low_running_products_recycler_view"
+        layout="@layout/recycler_view" />
+
+
 
 </FrameLayout>

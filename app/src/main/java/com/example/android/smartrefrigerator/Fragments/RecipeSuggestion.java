@@ -55,6 +55,8 @@ public class RecipeSuggestion extends Fragment {
         recyclerView = view.findViewById(R.id.recipe_suggestion_recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         recipeSuggestion = new ArrayList<>();
 

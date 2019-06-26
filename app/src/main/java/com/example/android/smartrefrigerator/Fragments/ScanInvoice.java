@@ -1,7 +1,6 @@
 package com.example.android.smartrefrigerator.Fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,9 +36,11 @@ public class ScanInvoice extends Fragment {
 
     private static ScanInvoice scanInvoiceFragment;
 
+    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 123;
     private Button buttonToChoose, buttonForUpload;
     private ImageView imageView;
     private Uri mCropImageUri;
+    private Uri imageUri;
     private Uri filePath;
     private View relativeView;
 
@@ -73,7 +74,7 @@ public class ScanInvoice extends Fragment {
         buttonToChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSelectImageClick(v);
+                onSelectImageClick();
             }
         });
 
@@ -86,8 +87,8 @@ public class ScanInvoice extends Fragment {
 
     }
 
-    public void onSelectImageClick(View v) {
-        //CropImage.startPickImageActivity(this);
+    public void onSelectImageClick() {
+        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         scanInvoiceFragment.startActivityForResult(CropImage.getPickImageChooserIntent(getActivity()), CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE);
     }
 
@@ -95,10 +96,12 @@ public class ScanInvoice extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("Inside onActivity","Inside onActivity");
         // handle result of pick image chooser
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK)
+        if ((requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE || requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) && resultCode == RESULT_OK)
         {
-            Log.e("Inside onActivitycamera","Inside onActivitycamera");
-            Uri imageUri = CropImage.getPickImageResultUri(getContext(), data);
+            if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE)
+                imageUri = CropImage.getPickImageResultUri(getContext(), data);
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
+                imageUri = data.getData();
 
             // For API >= 23 we need to check specifically that we have permissions to read external storage.
             if (CropImage.isReadExternalStoragePermissionsRequired(getContext(), imageUri)) {
@@ -120,7 +123,7 @@ public class ScanInvoice extends Fragment {
             if (resultCode == RESULT_OK) {
                 filePath = result.getUri();
                 imageView.setImageURI(filePath);
-                Toast.makeText(getContext(), "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Cropping successful", Toast.LENGTH_SHORT).show();
                 Log.e("Before Visibility","Before Visibility");
                 buttonToChoose.setVisibility(View.GONE);
                 relativeView.setVisibility(View.VISIBLE);
@@ -140,7 +143,7 @@ public class ScanInvoice extends Fragment {
             Log.d("After Permission","After Permission");
 
         } else {
-            Toast.makeText(getContext(), "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getContext(), "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -168,7 +171,7 @@ public class ScanInvoice extends Fragment {
             currentDateTimeString = currentDateTimeString.replace(" ", "-");
             Log.e("Time", currentDateTimeString);
 
-            StorageReference ref = storageReference.child("images/"+ currentDateTimeString + ".jpg");
+            StorageReference ref = storageReference.child("scannedInvoice/"+ currentDateTimeString + ".jpg");
 
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
