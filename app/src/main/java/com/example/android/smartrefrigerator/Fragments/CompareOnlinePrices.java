@@ -1,11 +1,16 @@
 package com.example.android.smartrefrigerator.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android.smartrefrigerator.HelperClass.ComparePriceAdapter;
 import com.example.android.smartrefrigerator.R;
 
 public class CompareOnlinePrices extends Fragment {
@@ -20,6 +25,18 @@ public class CompareOnlinePrices extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_compare_online_prices, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        RecyclerView comparePriceRecyclerView = view.findViewById(R.id.compare_online_prices_recycler_view);
+        comparePriceRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        comparePriceRecyclerView.setHasFixedSize(false);
+        ComparePriceAdapter comparePriceAdapter = new ComparePriceAdapter(view.getContext());
+
+        //TODO: Add ComparePrice items to adapter before setting adapter to recyclerview
+
+        comparePriceRecyclerView.setAdapter(comparePriceAdapter);
     }
 
     public static CompareOnlinePrices getCompareOnlinePricesFragment() {

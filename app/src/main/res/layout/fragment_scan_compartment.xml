@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ScanCompartment">
 
-
     <!--At start-->
     <Button
         android:id="@+id/buttonToChooseRack"
