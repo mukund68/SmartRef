@@ -5,13 +5,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="8dp"
-        android:foreground="?android:selectableItemBackground">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,7 +33,7 @@
                 android:layout_width="270dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:text="ItemName"
                 android:textColor="#000000"
                 android:textSize="30dp"
@@ -47,7 +44,7 @@
             <TextView
                 android:id="@+id/cq"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Current Quantity:"
@@ -57,18 +54,41 @@
                 tools:ignore="MissingConstraints"/>
 
             <TextView
+                android:id="@+id/sq"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="Suggested Quantity:"
+                android:textColor="#000000"
+                app:layout_constraintLeft_toRightOf="@id/lowConsumptionImage"
+                app:layout_constraintTop_toBottomOf="@id/itemName"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/suggestedQuantity"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="40dp"
+                android:text="suggested quantity"
+                app:layout_constraintLeft_toRightOf="@id/cq"
+                app:layout_constraintTop_toBottomOf="@id/itemName"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
                 android:id="@+id/currentQuantity"
                 android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="current quantity"
-                app:layout_constraintTop_toBottomOf="@id/itemName"
                 app:layout_constraintLeft_toRightOf="@id/cq"
-                tools:ignore="MissingConstraints"/>
+                app:layout_constraintTop_toBottomOf="@id/itemName"
+                tools:ignore="MissingConstraints" />
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </FrameLayout>

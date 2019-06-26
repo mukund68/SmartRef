@@ -21,8 +21,7 @@
     <FrameLayout
         android:id="@+id/cell_content_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/unfoldTitle"
+                android:id="@+id/storeName"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:text="Nature's Basket"
@@ -39,20 +38,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                folding-cell:cardElevation="4dp"
-                folding-cell:cardUseCompatPadding="true"
-                folding-cell:cardCornerRadius="8dp"
-                android:foreground="?android:selectableItemBackground">
-
-                <android.support.constraint.ConstraintLayout
+            <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageViewForCP"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
@@ -66,32 +57,59 @@
                         folding-cell:srcCompat="@drawable/img_capsicum" />
 
                     <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="146dp"
-                        android:layout_height="36dp"
-                        android:text="ItemName:"
-                        tools:layout_editor_absoluteX="118dp"
-                        tools:layout_editor_absoluteY="39dp" />
+                        android:id="@+id/itemNameForCP"
+                        android:layout_width="240dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="ItemName"
+                        android:textColor="#000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/imageViewForCP" />
 
                     <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="94dp"
-                        android:layout_height="44dp"
+                        android:id="@+id/tvPrice"
+                        android:layout_width="70dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
                         android:text="Price:"
-                        tools:layout_editor_absoluteX="271dp"
-                        tools:layout_editor_absoluteY="11dp" />
+                        android:textColor="#000000"
+                        app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+                        app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
 
                     <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="94dp"
-                        android:layout_height="44dp"
+                        android:id="@+id/textViewPrice"
+                        android:layout_width="150dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="8dp"
+                        android:text="price"
+                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+                    <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="70dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="36dp"
                         android:text="Quantity:"
-                        tools:layout_editor_absoluteX="271dp"
-                        tools:layout_editor_absoluteY="56dp" />
+                        android:textColor="#000000"
+                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+                    <TextView
+                        android:id="@+id/textViewQuantity"
+                        android:layout_width="150dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="36dp"
+                        android:text="quantity"
+                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
 
                 </android.support.constraint.ConstraintLayout>
-
-            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
@@ -102,7 +120,8 @@
     <FrameLayout
         android:id="@+id/cell_title_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -113,6 +132,8 @@
             app:cardElevation="4dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,26 +159,25 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/totalPrice"
+                        android:id="@+id/tp"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
+                        android:layout_marginTop="8dp"
                         android:text="Total Price:"
                         android:textColor="#000000"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="50dp"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintTop_toBottomOf="@+id/storeImage"
-                        tools:ignore="MissingConstraints" />
+                        tools:ignore="MissingConstraints"/>
 
                     <TextView
-                        android:id="@+id/cat"
+                        android:id="@+id/totalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="total price"
-                        app:layout_constraintLeft_toRightOf="@id/totalPrice"
+                        app:layout_constraintLeft_toRightOf="@id/tp"
                         app:layout_constraintTop_toBottomOf="@+id/storeImage"
                         android:textColor="#000000"
                         android:textSize="24sp"

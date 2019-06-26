@@ -170,6 +170,7 @@ public class ScanCompartment extends Fragment {
         Log.d("Inside CropImage","Inside CropImage");
         CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
+                .setMinCropResultSize(1920,1200)
                 .setMultiTouchEnabled(true)
                 .start(getContext(), this);
         Log.d("Crop Complete","Crop Complete");
