@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.android.smartrefrigerator.ApiHandler.ApiHandler;
+import com.example.android.smartrefrigerator.ApiHandler.ImageResponse;
+import com.example.android.smartrefrigerator.ApiHandler.JsonPlaceHolderApi;
 import com.example.android.smartrefrigerator.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,12 +31,19 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
 public class ScanInvoice extends Fragment {
 
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
     private static ScanInvoice scanInvoiceFragment;
 
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 123;
@@ -62,6 +72,7 @@ public class ScanInvoice extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        jsonPlaceHolderApi = ApiHandler.getJsonPlaceHolderApi();
         //Initialize Views
         buttonToChoose = view.findViewById(R.id.buttonToChoose);
         buttonForUpload = view.findViewById(R.id.buttonForUpload);
@@ -193,7 +204,37 @@ public class ScanInvoice extends Fragment {
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
+
+            //To POST API to server
+            ImageResponse imageName = new ImageResponse(currentDateTimeString);
+            Call<List<ImageResponse>> callToSendImage = jsonPlaceHolderApi.postImage(imageName);
+            callToSendImage.enqueue(new Callback<List<ImageResponse>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<ImageResponse>> call, @NonNull Response<List<ImageResponse>> response) {
+
+                    if (!response.isSuccessful()) {
+                        Log.d("Code: ", String.valueOf(response.code()));
+                        return;
+                    }
+
+                    Log.e("BeforeGET4", response.body().toString());
+                    List<ImageResponse> imageResponses = response.body();
+                    Log.e("GETResponse4", response.body().toString());
+
+                    for (ImageResponse imageResponse : imageResponses) {
+                        String result = imageResponse.getResult();
+                        Log.e("Result",result);
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<List<ImageResponse>> call, @NonNull Throwable t) {
+                    Log.d("Code: ",t.getMessage());
+                }
+            });
+
         }
+
     }
 
     public static ScanInvoice getScanInvoiceFragment() {

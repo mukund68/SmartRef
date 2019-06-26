@@ -56,7 +56,7 @@ public class RecipeSuggestion extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
 
         recipeSuggestion = new ArrayList<>();
 
@@ -90,6 +90,7 @@ public class RecipeSuggestion extends Fragment {
 
                 adapter = new AdapterSuggestRecipe(recipeSuggestion, getContext());
                 recyclerView.setAdapter(adapter);
+                //adapter.notifyDataSetChanged();
 
             }
 

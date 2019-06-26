@@ -29,9 +29,6 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 import static android.app.Activity.RESULT_OK;
 
 public class ScanCompartment extends Fragment {
@@ -212,6 +209,7 @@ public class ScanCompartment extends Fragment {
                         }
                     });
         }
+
     }
 
     public static ScanCompartment getScanCompartmentFragment() {

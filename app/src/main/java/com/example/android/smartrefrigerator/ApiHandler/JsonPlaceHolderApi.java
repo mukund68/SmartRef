@@ -21,7 +21,7 @@ public interface JsonPlaceHolderApi {
     @GET("lowfooditems")
     Call<List<LowFoodItem>> getLowFoodItem();
 
-    /*@POST("imageName/")
-    Call<List<ImageResponse>> postImage(@Body ImageResponse imageName);*/
+    @POST("imageName/")
+    Call<List<ImageResponse>> postImage(@Body ImageResponse imageName);
 
 }
