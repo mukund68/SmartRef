@@ -16,59 +16,66 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRecipe.ViewHolder> {
+public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRecipe.SuggestRecipeViewHolder> {
 
-    private ArrayList<SuggestRecipe> suggestRecipes;
+    private ArrayList<SuggestRecipe> suggestRecipesArrayList;
+    private LayoutInflater layoutInflater;
     private Context context;
 
-    public AdapterSuggestRecipe(ArrayList<SuggestRecipe> suggestRecipes, Context context) {
-        this.suggestRecipes = suggestRecipes;
+    public AdapterSuggestRecipe(Context context)
+    {
         this.context = context;
+        layoutInflater = LayoutInflater.from(context);
+        suggestRecipesArrayList = new ArrayList<SuggestRecipe>();
+    }
+
+    public void addSuggestRecipe(SuggestRecipe suggestRecipe)
+    {
+        suggestRecipesArrayList.add(suggestRecipe);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.recipe_suggestion_card, viewGroup, false);
-        return new ViewHolder(v);
+    public SuggestRecipeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SuggestRecipeViewHolder(layoutInflater.inflate(R.layout.recipe_suggestion_card, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        SuggestRecipe suggestRecipe = suggestRecipes.get(i);
+    public void onBindViewHolder(@NonNull SuggestRecipeViewHolder suggestRecipeViewHolder, int i) {
+        SuggestRecipe suggestRecipe = suggestRecipesArrayList.get(i);
 
-        viewHolder.recipeName.setText(suggestRecipe.getDishName());
-        viewHolder.dishName.setText(suggestRecipe.getDishName());
-        viewHolder.categoryName.setText(suggestRecipe.getCategory());
-        viewHolder.calorieNumber.setText(String.valueOf(suggestRecipe.getCalories()));
+        suggestRecipeViewHolder.recipeName.setText(suggestRecipe.getDishName());
+        suggestRecipeViewHolder.dishName.setText(suggestRecipe.getDishName());
+        suggestRecipeViewHolder.categoryName.setText(suggestRecipe.getCategory());
+        suggestRecipeViewHolder.calorieNumber.setText(String.valueOf(suggestRecipe.getCalories()));
 
         Picasso.with(context)
                 .load(suggestRecipe.getImage())
-                .into(viewHolder.recipeImage);
+                .into(suggestRecipeViewHolder.recipeImage);
 
         ArrayList<String> ingredients = suggestRecipe.getIngredients();
         String apiIngredients= "";
         for (String ingredient : ingredients){
             apiIngredients += ingredient + "\n";
         }
-        viewHolder.ingredients.setText(apiIngredients);
+        suggestRecipeViewHolder.ingredients.setText(apiIngredients);
 
         ArrayList<String> presentIngredients = suggestRecipe.getPresentIngredients();
         String apiPresentIngredients= "";
         for (String presentIngredient : presentIngredients){
             apiPresentIngredients += presentIngredient + "\n";
         }
-        viewHolder.presentIngredients.setText(apiPresentIngredients);
+        suggestRecipeViewHolder.presentIngredients.setText(apiPresentIngredients);
 
     }
 
     @Override
     public int getItemCount() {
-        return suggestRecipes.size();
+        return suggestRecipesArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class SuggestRecipeViewHolder extends RecyclerView.ViewHolder{
 
         public TextView recipeName;
         public TextView presentIngredients;
@@ -79,7 +86,7 @@ public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRec
         public TextView categoryName;
         public FoldingCell fc;
 
-        public ViewHolder(@NonNull View itemView) {
+        public SuggestRecipeViewHolder(@NonNull View itemView) {
             super(itemView);
 
             recipeName = itemView.findViewById(R.id.recipeName);
@@ -89,8 +96,8 @@ public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRec
             dishName = itemView.findViewById(R.id.dishName);
             calorieNumber = itemView.findViewById(R.id.calorieNumber);
             categoryName = itemView.findViewById(R.id.categoryName);
+
             fc = itemView.findViewById(R.id.folding_cell_rs);
-            // attach click listener to folding cell
             fc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,9 +108,7 @@ public class AdapterSuggestRecipe extends RecyclerView.Adapter<AdapterSuggestRec
                     }
                 }
             });
-
         }
     }
-
 
 }

@@ -12,8 +12,8 @@ public interface JsonPlaceHolderApi {
     /*@GET("getstockdetails")
     Call<List<MarketPrice>> getMarketPrices();*/
 
-    /*@GET("compare")
-    Call<List<ComparePrice>> comparePrices();*/
+    @GET("compare")
+    Call<List<ComparePrice>> comparePrices();
 
     @GET("suggestrecipes")
     Call<List<SuggestRecipe>> suggestRecipes();

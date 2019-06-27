@@ -21,97 +21,44 @@
     <FrameLayout
         android:id="@+id/cell_content_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="8dp"
+            android:foreground="?android:selectableItemBackground">
 
-            <TextView
-                android:id="@+id/storeName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:text="Nature's Basket"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+                <TextView
+                    android:id="@+id/storeName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="24dp"
+                    android:text="Nature's Basket"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/imageViewForCP"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:scaleType="fitXY"
-                        folding-cell:layout_constraintBottom_toBottomOf="parent"
-                        folding-cell:layout_constraintStart_toStartOf="parent"
-                        folding-cell:layout_constraintTop_toTopOf="parent"
-                        folding-cell:srcCompat="@drawable/img_capsicum" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/itemNameForCP"
-                        android:layout_width="240dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="10dp"
-                        android:text="ItemName"
-                        android:textColor="#000000"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/imageViewForCP" />
+                        <include layout="@layout/recycler_view"
+                            android:id="@+id/compare_price_recycler_view"/>
 
-                    <TextView
-                        android:id="@+id/tvPrice"
-                        android:layout_width="70dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Price:"
-                        android:textColor="#000000"
-                        app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
-                        app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+                    </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/textViewPrice"
-                        android:layout_width="150dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="100dp"
-                        android:layout_marginTop="8dp"
-                        android:text="price"
-                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
-                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvQuantity"
-                        android:layout_width="70dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="36dp"
-                        android:text="Quantity:"
-                        android:textColor="#000000"
-                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
-                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
-
-                    <TextView
-                        android:id="@+id/textViewQuantity"
-                        android:layout_width="150dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="100dp"
-                        android:layout_marginTop="36dp"
-                        android:text="quantity"
-                        folding-cell:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
-                        folding-cell:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
-
-                </android.support.constraint.ConstraintLayout>
-
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     </FrameLayout>
 
@@ -120,8 +67,7 @@
     <FrameLayout
         android:id="@+id/cell_title_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -132,8 +78,6 @@
             app:cardElevation="4dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -192,6 +192,8 @@ public class ScanCompartment extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                            relativeView.setVisibility(View.GONE);
+                            buttonToChooseRack.setVisibility(View.VISIBLE);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

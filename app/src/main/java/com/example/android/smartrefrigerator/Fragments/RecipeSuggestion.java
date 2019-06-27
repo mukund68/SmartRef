@@ -18,7 +18,6 @@ import com.example.android.smartrefrigerator.ApiHandler.SuggestRecipe;
 import com.example.android.smartrefrigerator.HelperClass.AdapterSuggestRecipe;
 import com.example.android.smartrefrigerator.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,11 +28,9 @@ public class RecipeSuggestion extends Fragment {
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private AdapterSuggestRecipe adapterSuggestRecipe;
     private LinearLayoutManager linearLayoutManager;
     private ProgressBar progressBar;
-
-    private ArrayList<SuggestRecipe> recipeSuggestion;
 
     private static RecipeSuggestion recipeSuggestionFragment;
 
@@ -55,11 +52,8 @@ public class RecipeSuggestion extends Fragment {
         recyclerView = view.findViewById(R.id.recipe_suggestion_recycler_view);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(false);
-        recyclerView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
 
-        recipeSuggestion = new ArrayList<>();
-
+        adapterSuggestRecipe = new AdapterSuggestRecipe(view.getContext());
         suggestRecipe();
 
         progressBar.setVisibility(View.GONE);
@@ -84,13 +78,10 @@ public class RecipeSuggestion extends Fragment {
                 List<SuggestRecipe> suggestRecipes = response.body();
                 Log.d("GETResponse2", response.body().toString());
 
-                for (SuggestRecipe suggestRecipe : suggestRecipes) {
-                    recipeSuggestion.add(suggestRecipe);
-                }
+                for (SuggestRecipe suggestRecipe : suggestRecipes)
+                    adapterSuggestRecipe.addSuggestRecipe(suggestRecipe);
 
-                adapter = new AdapterSuggestRecipe(recipeSuggestion, getContext());
-                recyclerView.setAdapter(adapter);
-                //adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterSuggestRecipe);
 
             }
 

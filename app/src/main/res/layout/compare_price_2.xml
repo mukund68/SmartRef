@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewForCP"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_capsicum" />
+
+        <TextView
+            android:id="@+id/itemNameForCP"
+            android:layout_width="240dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:text="ItemName"
+            android:textColor="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/imageViewForCP" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Price:"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+            app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="8dp"
+            android:text="price"
+            app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+            app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:text="Quantity:"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+            app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+        <TextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="36dp"
+            android:text="quantity"
+            app:layout_constraintLeft_toRightOf="@+id/imageViewForCP"
+            app:layout_constraintTop_toBottomOf="@+id/itemNameForCP" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

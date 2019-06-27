@@ -53,14 +53,14 @@ public class AdapterLowConsumption extends RecyclerView.Adapter<AdapterLowConsum
 
         public ImageView lowConsumptionImage;
         public TextView itemName;
-        public TextView currentQuantity;
+        public TextView suggestedQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             lowConsumptionImage = itemView.findViewById(R.id.lowConsumptionImage);
             itemName = itemView.findViewById(R.id.itemName);
-            currentQuantity = itemView.findViewById(R.id.currentQuantity);
+            suggestedQuantity = itemView.findViewById(R.id.suggestedQuantity);
 
         }
     }
