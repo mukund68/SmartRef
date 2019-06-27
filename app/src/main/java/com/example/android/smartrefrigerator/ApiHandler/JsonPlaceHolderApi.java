@@ -24,6 +24,9 @@ public interface JsonPlaceHolderApi {
     @GET("compartment")
     Call<List<CompartmentResult>> getCompartments();
 
+    @GET("fridgecontent")
+    Call<List<FridgeContent>> getFridgeContents();
+
     @POST("imageName/")
     Call<List<ImageResponse>> postImage(@Body ImageResponse imageName);
 

@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class CompartmentResult {
+public class FridgeContent {
 
     @SerializedName("Rack")
     private String rack;
     @SerializedName("products")
     private ArrayList<Product> products;
 
-    public CompartmentResult(String rack, ArrayList<Product> products) {
+    public FridgeContent(String rack, ArrayList<Product> products) {
         this.rack = rack;
         this.products = products;
     }
 
-    public CompartmentResult() {
+    public FridgeContent() {
     }
 
     public String getRack() {
