@@ -2,21 +2,33 @@ package com.example.android.smartrefrigerator.ApiHandler;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class LowFoodItem {
 
-    @SerializedName("products")
-    private ArrayList<Product> products;
+    @SerializedName("ItemName")
+    private String itemName;
+    @SerializedName("Quant")
+    private int quantity;
+    @SerializedName("Rate")
+    private String rate;
 
-    public LowFoodItem(ArrayList<Product> products) {
-        this.products = products;
+    public LowFoodItem(String itemName, int quantity, String rate) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.rate = rate;
     }
 
     public LowFoodItem() {
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public String getItemName() {
+        return itemName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getRate() {
+        return rate;
     }
 }

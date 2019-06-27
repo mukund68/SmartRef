@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.LowRunningProducts">
 
+    <ProgressBar
+        android:id="@+id/low_running_products_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="500dp">
-
-        <ProgressBar
-            android:id="@+id/low_running_products_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
         <include
             android:id="@+id/low_running_products_recycler_view"
@@ -21,20 +21,13 @@
 
     </FrameLayout>
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="500dp">
-
-        <Button
-            android:id="@+id/buttonLowRunningToCompare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:text="Compare Prices" />
-
-    </RelativeLayout>
+    <Button
+        android:id="@+id/buttonLowRunningToCompare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="140dp"
+        android:text="Compare Prices" />
 
 </FrameLayout>

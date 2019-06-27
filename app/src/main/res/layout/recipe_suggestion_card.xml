@@ -22,6 +22,7 @@
         android:id="@+id/cell_content_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:visibility="gone">
 
         <android.support.v7.widget.CardView
@@ -72,12 +73,11 @@
                         android:id="@+id/presentIngredients"
                         android:layout_width="186dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="172dp"
-                        android:layout_marginLeft="172dp"
+                        android:layout_marginLeft="5dp"
                         android:text="Present Ingredients"
                         android:textSize="18sp"
-                        folding-cell:layout_constraintStart_toStartOf="parent"
-                        folding-cell:layout_constraintTop_toBottomOf="@+id/recipeName" />
+                        app:layout_constraintLeft_toRightOf="@+id/pI"
+                        app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
                     <TextView
                         android:id="@+id/ingred"

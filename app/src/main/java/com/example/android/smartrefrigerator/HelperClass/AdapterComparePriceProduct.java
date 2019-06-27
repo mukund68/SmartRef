@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.smartrefrigerator.ApiHandler.Product;
@@ -13,13 +14,13 @@ import com.example.android.smartrefrigerator.R;
 
 import java.util.ArrayList;
 
-public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductViewHolder>
+public class AdapterComparePriceProduct extends RecyclerView.Adapter<AdapterComparePriceProduct.ProductViewHolder>
 {
     private Context context;
     private LayoutInflater layoutLInflater;
     private ArrayList<Product> productArrayList;
 
-    AdapterProduct(Context context)
+    AdapterComparePriceProduct(Context context)
     {
         this.context = context;
         layoutLInflater = LayoutInflater.from(context);
@@ -42,9 +43,12 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
         Product product = productArrayList.get(i);
+
+        productViewHolder.setItemImage(product.getItemName());
         productViewHolder.setItemName(product.getItemName());
         productViewHolder.setPrice(product.getPrice());
         productViewHolder.setQuantity(product.getQuantity(), product.getRate());
+
     }
 
     @Override
@@ -57,12 +61,22 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
         private TextView itemNameText;
         private TextView priceText;
         private TextView quantityText;
+        private ImageView imageViewForCP;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             itemNameText = itemView.findViewById(R.id.itemNameForCP);
             priceText = itemView.findViewById(R.id.textViewPrice);
             quantityText = itemView.findViewById(R.id.textViewQuantity);
+            imageViewForCP = itemView.findViewById(R.id.imageViewForCP);
+        }
+
+        public void setItemImage(String itemName)
+        {
+            itemName = itemName.toLowerCase();
+
+            int res = context.getResources().getIdentifier("img_" + itemName, "drawable", context.getPackageName());
+            imageViewForCP.setImageResource(res);
         }
 
         public void setItemName(String itemName)
@@ -77,7 +91,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ProductV
 
         public void setQuantity(int quantity, String rate)
         {
-            quantityText.setText(quantity + rate);
+            quantityText.setText(String.valueOf(quantity).concat(rate));
         }
     }
 }

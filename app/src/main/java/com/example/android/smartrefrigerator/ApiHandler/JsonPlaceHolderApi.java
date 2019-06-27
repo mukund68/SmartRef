@@ -21,7 +21,12 @@ public interface JsonPlaceHolderApi {
     @GET("lowfooditems")
     Call<List<LowFoodItem>> getLowFoodItem();
 
+    @GET("compartment")
+    Call<List<CompartmentResult>> getCompartments();
+
     @POST("imageName/")
     Call<List<ImageResponse>> postImage(@Body ImageResponse imageName);
+
+
 
 }

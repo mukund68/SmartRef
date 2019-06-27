@@ -45,7 +45,9 @@ public class AdapterComparePrice extends RecyclerView.Adapter<AdapterComparePric
     @Override
     public void onBindViewHolder(@NonNull ComparePriceViewHolder comparePriceViewHolder, int i) {
         ComparePrice comparePrice = comparePriceArrayList.get(i);
-        comparePriceViewHolder.setStore(comparePrice.getStore());
+
+        comparePriceViewHolder.setStoreImage(comparePrice.getStore());
+        comparePriceViewHolder.setStorename(comparePrice.getStore());
         comparePriceViewHolder.setTotalBill(comparePrice.getTotalBill());
         comparePriceViewHolder.setProducts(comparePrice.getProducts());
     }
@@ -60,6 +62,7 @@ public class AdapterComparePrice extends RecyclerView.Adapter<AdapterComparePric
         private RecyclerView recyclerView;
         public FoldingCell foldingCell;
         private ImageView storeImage;
+        private TextView storeName;
         private TextView totalBillText;
 
         public ComparePriceViewHolder(@NonNull View itemView) {
@@ -84,18 +87,20 @@ public class AdapterComparePrice extends RecyclerView.Adapter<AdapterComparePric
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setHasFixedSize(false);
             recyclerView.setNestedScrollingEnabled(false);
+
             totalBillText = itemView.findViewById(R.id.totalPrice);
             storeImage = itemView.findViewById(R.id.storeImage);
+            storeName = itemView.findViewById(R.id.storeName);
         }
 
         void setProducts(ArrayList<Product> productArrayList)
         {
-            AdapterProduct productAdapter = new AdapterProduct(context);
+            AdapterComparePriceProduct productAdapter = new AdapterComparePriceProduct(context);
             productAdapter.addAllProduct(productArrayList);
             recyclerView.setAdapter(productAdapter);
         }
 
-        public void setStore(String store)
+        public void setStoreImage(String store)
         {
             store = store.replace(" ", "_");
             store = store.replace("'", "");
@@ -103,6 +108,11 @@ public class AdapterComparePrice extends RecyclerView.Adapter<AdapterComparePric
 
             int res = context.getResources().getIdentifier("img_" + store, "drawable", context.getPackageName());
             storeImage.setImageResource(res);
+        }
+
+        public void setStorename(String store)
+        {
+            storeName.setText(store);
         }
 
         public void setTotalBill(float totalBill)

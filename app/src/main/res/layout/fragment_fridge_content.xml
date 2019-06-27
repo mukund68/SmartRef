@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.FridgeContent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ProgressBar
+        android:id="@+id/fridge_content_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <include
+        layout="@layout/recycler_view"
+        android:id="@+id/fridge_content_recycler_view"/>
 
 </FrameLayout>
