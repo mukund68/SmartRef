@@ -22,8 +22,8 @@ public class AdapterLowRunningItems extends RecyclerView.Adapter<AdapterLowRunni
 
     public AdapterLowRunningItems(Context context)
     {
-        layoutInflater = LayoutInflater.from(context);
         this.context = context;
+        layoutInflater = LayoutInflater.from(context);
         lowFoodItemsArrayList = new ArrayList<LowFoodItem>();
     }
 
@@ -37,13 +37,13 @@ public class AdapterLowRunningItems extends RecyclerView.Adapter<AdapterLowRunni
     @Override
     public LowFoodItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new LowFoodItemViewHolder(layoutInflater.inflate(R.layout.low_consumption_card, viewGroup, false));
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull LowFoodItemViewHolder lowFoodItemViewHolder, int i) {
         LowFoodItem lowFoodItem = lowFoodItemsArrayList.get(i);
 
+        //String itemName = lowFoodItem.getItemName();
         lowFoodItemViewHolder.setItemNameLC(lowFoodItem.getItemName());
         lowFoodItemViewHolder.setLowConsumptionImage(lowFoodItem.getItemName());
         lowFoodItemViewHolder.setQuantity(lowFoodItem.getQuantity(), lowFoodItem.getRate());

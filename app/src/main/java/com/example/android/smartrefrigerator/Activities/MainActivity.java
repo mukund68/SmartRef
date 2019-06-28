@@ -17,7 +17,7 @@ import android.view.Menu;
 
 import com.example.android.smartrefrigerator.Fragments.CompareOnlinePrices;
 import com.example.android.smartrefrigerator.Fragments.Compartmentalization;
-import com.example.android.smartrefrigerator.Fragments.FridgeContent;
+import com.example.android.smartrefrigerator.Fragments.FridgeContents;
 import com.example.android.smartrefrigerator.Fragments.LowRunningProducts;
 import com.example.android.smartrefrigerator.Fragments.ManageUser;
 import com.example.android.smartrefrigerator.Fragments.RecipeSuggestion;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 
     private final CompareOnlinePrices compareOnlinePricesFragment = CompareOnlinePrices.getCompareOnlinePricesFragment();
     private final Compartmentalization compartmentalizationFragment = Compartmentalization.getCompartmentalizationFragment();
-    private final FridgeContent fridgeContentFragment = FridgeContent.getFridgeContentFragment();
+    private final FridgeContents fridgeContentFragment = FridgeContents.getFridgeContentFragment();
     private final LowRunningProducts lowRunningProductsFragment = LowRunningProducts.getLowRunningProductsFragment();
     private final ManageUser manageUserFragment = ManageUser.getManageUserFragment();
     private final RecipeSuggestion recipeSuggestionFragment = RecipeSuggestion.getRecipeSuggestionFragment();

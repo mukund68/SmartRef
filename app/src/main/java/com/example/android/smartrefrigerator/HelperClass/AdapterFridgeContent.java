@@ -29,7 +29,7 @@ public class AdapterFridgeContent extends RecyclerView.Adapter<AdapterFridgeCont
         fridgeContentArrayList = new ArrayList<FridgeContent>();
     }
 
-    public void addCompartmentResult(FridgeContent fridgeContent)
+    public void addFridgeContent(FridgeContent fridgeContent)
     {
         fridgeContentArrayList.add(fridgeContent);
         notifyDataSetChanged();

@@ -20,6 +20,12 @@ public class Product
         this.rate = rate;
     }
 
+    public Product(String itemName, int quantity, String rate) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.rate = rate;
+    }
+
     public Product() {
     }
 
