@@ -1,38 +1,46 @@
 package com.example.android.smartrefrigerator.Fragments;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.smartrefrigerator.ApiHandler.ExpiryDetails;
+import com.example.android.smartrefrigerator.ApiHandler.ExpiryForFood;
+import com.example.android.smartrefrigerator.ApiHandler.Food;
+import com.example.android.smartrefrigerator.ApiHandler.JsonPlaceHolderApi;
 import com.example.android.smartrefrigerator.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SetExpiry extends Fragment {
 
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
     private static SetExpiry setExpiryFragment;
 
     private Button buttonToSetExpiry;
     private TextView textViewToSetExpiry;
+    private ImageView imageFromApi;
+    private TextView editFoodName;
     private ImageButton buton_calendar;
 
     public SetExpiry() {
@@ -49,11 +57,21 @@ public class SetExpiry extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //API
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.edamam.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
         //Initialize Views
         buttonToSetExpiry = view.findViewById(R.id.buttonToSetExpiry);
         textViewToSetExpiry =  view.findViewById(R.id.textViewToSetExpiry);
 
         buton_calendar = view.findViewById(R.id.buton_calendar);
+        imageFromApi = view.findViewById(R.id.imageFromApi);
+        editFoodName = view.findViewById(R.id.editFoodName);
 
         buttonToSetExpiry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,63 +80,7 @@ public class SetExpiry extends Fragment {
             }
         });
 
-        /*buton_calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Initialize a new date picker dialog fragment
-                DialogFragment dFragment = new DatePickerFragment();
-
-                // Show the date picker dialog fragment
-                dFragment.show(getFragmentManager(), "Date Picker");
-            }
-        });*/
     }
-
-   /* public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener{
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState){
-            final Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
-                    AlertDialog.THEME_HOLO_LIGHT,this,year,month,day);
-
-            // Create a TextView programmatically.
-            TextView tv = new TextView(getActivity());
-
-            // Create a TextView programmatically
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, // Width of TextView
-                    RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
-            tv.setLayoutParams(lp);
-            tv.setPadding(10, 10, 10, 10);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
-            //tv.setText("This is a custom title.");
-            //tv.setText(calendar.getTime().toString());
-            StringBuffer sb = new StringBuffer();
-            sb.append(day+" "+month+" "+year);
-            tv.setText(sb.toString());
-            tv.setTextColor(Color.parseColor("#ff0000"));
-            tv.setBackgroundColor(Color.parseColor("#FFD2DAA7"));
-
-            // Set the newly created TextView as a custom tile of DatePickerDialog
-            dpd.setCustomTitle(tv);
-
-            // Or you can simply set a tile for DatePickerDialog
-            *//*
-                setTitle(CharSequence title)
-                    Set the title text for this dialog's window.
-            *//*
-            // dpd.setTitle("This is a simple title."); // Uncomment this line to activate it
-
-            // Return the DatePickerDialog
-            return  dpd;
-        }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -130,11 +92,52 @@ public class SetExpiry extends Fragment {
             } else {
                 //if bar contains data
                 Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
-                textViewToSetExpiry.setText(result.getContents());
+                textViewToSetExpiry.setText("");
+                String upc = result.getContents();
+                showExpiryDetails(upc);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void showExpiryDetails(String upc) {
+
+        Call<ExpiryDetails> callToShowExpiryDetails = jsonPlaceHolderApi.getExpiryDetails("https://api.edamam.com/api/food-database/parser?upc="+upc+"&app_id=2a38f2f1&app_key=77779de4ded01d6736250e3ddb89eec5");
+
+        callToShowExpiryDetails.enqueue(new Callback<ExpiryDetails>() {
+            @Override
+            public void onResponse(@NonNull Call<ExpiryDetails> call, @NonNull Response<ExpiryDetails> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getContext(),"Did not scan barcode properly: " + response.code(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ExpiryDetails expiryDetails = response.body();
+                Log.e("GETResponse", response.body().toString());
+
+                textViewToSetExpiry.setText(expiryDetails.getText());
+
+                ArrayList<Food> foods = expiryDetails.getHints();
+                Log.e("Response",foods.toString());
+
+                Food food = foods.get(0);
+                ExpiryForFood expiryForFood = food.getFood();
+
+                Picasso.with(getContext())
+                        .load(expiryForFood.getImageUrl())
+                        .into(imageFromApi);
+
+                editFoodName.setText(expiryForFood.getLabel());
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ExpiryDetails> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public static SetExpiry getSetExpiryFragment() {
